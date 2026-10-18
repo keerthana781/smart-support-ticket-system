@@ -1,0 +1,19 @@
+# Secrets: never commit these
+.env
+*.env.local
+
+# Java / Maven
+backend/target/
+*.class
+*.log
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+
+# IDEs and OS files
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db

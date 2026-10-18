@@ -1,0 +1,28 @@
+# Test configuration: replaces the main application.yml during "mvn test".
+# Uses an in-memory H2 database and the offline rule-based AI, so tests need no PostgreSQL,
+# no internet and no API key. This is what lets the GitHub Actions pipeline run anywhere.
+spring:
+  datasource:
+    url: jdbc:h2:mem:supportdesk;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+
+app:
+  jwt:
+    secret: dGVzdC1vbmx5LXNlY3JldC1rZXktZm9yLXVuaXQtdGVzdHMtMTIzNDU2Nzg5MA==
+    expiration-minutes: 60
+  cors:
+    allowed-origins: http://localhost:5173
+  seed:
+    enabled: false
+  ai:
+    provider: rules
+    gemini:
+      api-key:
+      model: gemini-2.5-flash
+      base-url: https://generativelanguage.googleapis.com/v1beta
+      timeout-seconds: 5
